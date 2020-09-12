@@ -1,0 +1,98 @@
+﻿@model AgendaI4pro.Models.Contato
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Contato</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @*<div class="form-group">
+            <label asp-for="Id" class="control-label"></label>
+            <input asp-for="Id" class="form-control" />
+            <span asp-validation-for="Id" class="text-danger"></span>
+        </div>*@
+            <div class="form-group">
+                <label asp-for="Nome" class="control-label"></label>
+                <input asp-for="Nome" class="form-control" maxlength="100" />
+                <span asp-validation-for="Nome" class="text-danger"></span>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-10">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" maxlength="100" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="col">
+                    <label asp-for="Email" class="control-label" style="visibility:hidden"></label>
+                    <input type="button" value="+" class="btn btn-success form-control" onclick="addEmail()" />
+                </div>
+            </div>
+            <div id="newEmail">
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-10">
+                    <label asp-for="Telefone" class="control-label"></label>
+                    <input asp-for="Telefone" class="form-control" maxlength="10" />
+                    <span asp-validation-for="Telefone" class="text-danger"></span>
+                </div>
+                <div class="col">
+                    <label asp-for="Telefone" class="control-label" style="visibility:hidden"></label>
+                    <input type="button" value="+" class="btn btn-success form-control" onclick="addTel()" />
+                </div>
+            </div>
+            <div id="newTel">
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+<script>
+    function addEmail() {
+        $('#newEmail').append('<div class="form-row" id="formEmail">\
+                                    <div class="form-group col-md-10">\
+                                        <label asp-for="Email" class="control-label">Email</label>\
+                                        <input asp-for="Email" class="form-control" name="Email"/>\
+                                        <span asp-validation-for="Email" class="text-danger"></span>\
+                                    </div>\
+                                    <div class="col">\
+                                        <label asp-for="Email" class="control-label" style="visibility:hidden">Email</label>\
+                                        <input id="btnDelEmail" type="button" value="-" class="btn btn-danger form-control" onclick="deleteForm(this)" />\
+                                    </div>\
+                                </div>');
+    }
+
+    function deleteForm(btn) {
+        btn.parentElement.parentElement.remove()
+       //$('#btnDelEmail').parent().parent().remove()
+    }
+
+    function addTel() {
+        $('#newTel').append('<div class="form-row">\
+                                <div class="form-group col-md-10">\
+                                    <label asp-for="Telefone" class="control-label">Telefone</label>\
+                                    <input asp-for="Telefone" class="form-control" name="Telefone"/>\
+                                    <span asp-validation-for="Telefone" class="text-danger"></span>\
+                                </div>\
+                                <div class="col">\
+                                    <label asp-for="Telefone" class="control-label" style="visibility:hidden">Telefone</label>\
+                                    <input type="button" value="-" class="btn btn-danger form-control" onclick="deleteForm(this)" />\
+                                </div>\
+                            </div>');
+    }
+</script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

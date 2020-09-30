@@ -4,22 +4,22 @@ USE [BancoI4pro]
 GO
 
 CREATE TABLE [dbo].[Contato](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Id] [int] IDENTITY(1,1) NOT NULL PRIMARY KEY,
 	[Nome] [varchar](100) NOT NULL
-) ON [PRIMARY]
+)
 GO
 
 CREATE TABLE [dbo].[Email](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Id] [int] IDENTITY(1,1) NOT NULL PRIMARY KEY,
 	[Email] [varchar](100) NOT NULL,
-	[IdContato] [int] NOT NULL
-) ON [PRIMARY]
+	[IdContato] [int] NOT NULL FOREIGN KEY REFERENCES Contato(Id)
+)
 GO
 
 CREATE TABLE [dbo].[Telefone](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Id] [int] IDENTITY(1,1) NOT NULL PRIMARY KEY,
 	[Telefone] [varchar](10) NOT NULL,
-	[IdContato] [int] NOT NULL
-) ON [PRIMARY]
+	[IdContato] [int] NOT NULL FOREIGN KEY REFERENCES Contato(Id)
+)
 GO
 
